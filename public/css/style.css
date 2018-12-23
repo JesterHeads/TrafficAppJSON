@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100vh;
+}
+
+body .errors {
+  z-index: 9999;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+body .errors > div {
+  cursor: pointer;
+  width: 80%;
+  padding: 20px;
+  background: rgba(231, 56, 56, 0.733);
+  margin: 15px auto;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 0, 0, 0.678);
+  position: relative;
+}
+body .errors > div:after {
+  content: "X";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+body #map {
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+/*# sourceMappingURL=style.css.map */
