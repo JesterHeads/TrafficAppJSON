@@ -180,6 +180,20 @@ EOT;
 $scriptMap .= "});</script>";
 
 
+$url_nasa = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=kdlIh4yvdWnDv8ag5AYZpCrlYWU8dfU4V1fACMc0";
+$data_photos = getJSON($url_nasa, "photos de curiosity");
+if($data_photos['code'] != 200){
+    $errorsHTML[] = $data_photos['content'];
+} else {
+    $photos = $data_photos['content']['photos'];
+    foreach($photos as $photo){
+        if($photo['camera']['name'] == "RHAZ"){
+            $src = $photo['img_src'];
+            $back_photos = "<img src='$src'>";
+        }
+    }
+}
+
 
 $errorRenderHTML  = "<div class='errors'>" . implode('', $errorsHTML) . '</div>';
 
@@ -193,7 +207,9 @@ $html = <<<EOT
 
     <body>
         $errorRenderHTML
+        
         <div id="map"></div>
+        <div id="curiosity">$back_photos</div>
         <!-- Script -->
         <script
             src="https://code.jquery.com/jquery-3.3.1.js"
