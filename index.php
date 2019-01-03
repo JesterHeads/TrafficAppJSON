@@ -17,7 +17,7 @@ function getJSON($url, $name = "service"){
         case 200 :
             $content = json_decode($dataString, true);
             break;
-        case 404 :#
+        case 404 :
             $content = "<div>Une erreur est survenue. Impossibler d'acceder aux $name.</div>";
             break;
         case 500 :
@@ -34,7 +34,6 @@ function getJSON($url, $name = "service"){
     ];
 }
  
-
 /* Proxy IUT */
 if($_SERVER['HTTP_HOST'] == "webetu.iutnc.univ-lorraine.fr"){
     error_reporting(0);
@@ -63,6 +62,9 @@ if($data['code'] != 200){
 $scriptMap = <<<EOT
 <script>
     $(function(){
+        $('.curiosity-trigger').on('click', function(e){
+            $('#curiosity').toggleClass('show');
+        });
         $('.errors div').on('click', function(e){
             $(e.currentTarget).fadeOut(200);
         });
@@ -209,7 +211,11 @@ $html = <<<EOT
         $errorRenderHTML
         
         <div id="map"></div>
-        <div id="curiosity">$back_photos</div>
+        
+        <div id="curiosity">
+            <div class="curiosity-trigger">Voir photo curiosity</div>
+            $back_photos
+        </div>
         <!-- Script -->
         <script
             src="https://code.jquery.com/jquery-3.3.1.js"
